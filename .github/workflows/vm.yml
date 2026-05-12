@@ -79,6 +79,7 @@ jobs:
       fail-fast: false
       matrix:
         target:
+          - "12.4"
           - "13.5"
           - "14.4"
           - "15.0"
@@ -227,8 +228,10 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - "r151054"
           - "r151046"
+          - "r151054"
+          - "r151056-build"
+          - "r151058-build"
         config: [default]
     runs-on: ubuntu-latest
     steps:
