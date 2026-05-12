@@ -96,7 +96,16 @@ jobs:
         release: ${{ matrix.target }}
         usesh: true
         prepare: |
-          pkg install -y sudo
+          case $(uname -r) in
+          12.*)
+            ftp ftp://ftp.sudo.ws/pub/sudo/sudo-1.8.32.tar.gz
+            tar xfz sudo-1.8.32.tar.gz
+            (cd sudo-1.8.32 && ./configure --sysconfdir=/usr/local/etc && make && make install)
+            ;;
+          *)
+            pkg install -y sudo
+            ;;
+          esac
           openssl rand -base64 9 >$GITHUB_WORKSPACE/regress/password
           pw useradd builder -m -h0 <$GITHUB_WORKSPACE/regress/password
           chown builder $GITHUB_WORKSPACE/regress/password
