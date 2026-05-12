@@ -237,8 +237,6 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - "r151046"
-          - "r151054"
           - "r151056-build"
           - "r151058-build"
         config: [default]
