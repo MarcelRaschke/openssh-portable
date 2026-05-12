@@ -246,8 +246,10 @@ jobs:
         usesh: true
         prepare: |
           set -x
-          pfexec pkg refresh
-          pfexec pkg install build-essential
+          if [ ! -x $(which gcc 2>/dev/null) ]; then
+            pfexec pkg refresh
+            pfexec pkg install build-essential
+          fi
           useradd -m builder
           sed -e "s/^root.*ALL$/root ALL=(ALL) NOPASSWD: ALL/" /etc/sudoers >>/tmp/sudoers
           mv /tmp/sudoers /etc/sudoers
